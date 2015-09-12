@@ -757,59 +757,59 @@ end
 function IntroMission2NIS()
     ScenarioFramework.SetPlayableArea('M2_Playable_Area', false)
 
-    Cinematics.EnterNISMode()
-    Cinematics.SetInvincible('M1_Playable_Area')
+    Cutscene.Start(function(scene)
+        Cinematics.SetInvincible('M1_Playable_Area')
 
-    local fakeMarker1 = {
-        ['zoom'] = FLOAT(35),
-        ['canSetCamera'] = BOOLEAN(true),
-        ['canSyncCamera'] = BOOLEAN(true),
-        ['color'] = STRING('ff808000'),
-        ['editorIcon'] = STRING('/textures/editor/marker_mass.bmp'),
-        ['type'] = STRING('Camera Info'),
-        ['prop'] = STRING('/env/common/props/markers/M_Camera_prop.bp'),
-        ['orientation'] = VECTOR3(-3.14159, 1.19772, 0),
-        ['position'] = ScenarioInfo.PlayerCDR:GetPosition(),
-    }
-    Cinematics.CameraMoveToMarker(fakeMarker1, 0)
+        local fakeMarker1 = {
+            ['zoom'] = FLOAT(35),
+            ['canSetCamera'] = BOOLEAN(true),
+            ['canSyncCamera'] = BOOLEAN(true),
+            ['color'] = STRING('ff808000'),
+            ['editorIcon'] = STRING('/textures/editor/marker_mass.bmp'),
+            ['type'] = STRING('Camera Info'),
+            ['prop'] = STRING('/env/common/props/markers/M_Camera_prop.bp'),
+            ['orientation'] = VECTOR3(-3.14159, 1.19772, 0),
+            ['position'] = ScenarioInfo.PlayerCDR:GetPosition(),
+        }
+        scene.CameraMoveToMarker(fakeMarker1, 0)
 
-    WaitSeconds(1)
+        scene.WaitSeconds(1)
 
-    -- Show the prison
-    ScenarioFramework.CreateVisibleAreaLocation(4, ScenarioInfo.Prison:GetPosition(), 10, ArmyBrains[Player])
-    ScenarioFramework.CreateVisibleAreaLocation(60, ScenarioUtils.MarkerToPosition('M2_QAI_Base_Marker'), 10, ArmyBrains[Player])
-    -- ScenarioFramework.CreateVisibleAreaLocation( 60, ScenarioUtils.MarkerToPosition( 'Order_M2_North_Base_Marker' ), 10, ArmyBrains[Player] )
-    ScenarioFramework.CreateVisibleAreaLocation(350, ScenarioInfo.Prison:GetPosition(), 1, ArmyBrains[Player])
+        -- Show the prison
+        ScenarioFramework.CreateVisibleAreaLocation(4, ScenarioInfo.Prison:GetPosition(), 10, ArmyBrains[Player])
+        ScenarioFramework.CreateVisibleAreaLocation(60, ScenarioUtils.MarkerToPosition('M2_QAI_Base_Marker'), 10, ArmyBrains[Player])
+        -- ScenarioFramework.CreateVisibleAreaLocation( 60, ScenarioUtils.MarkerToPosition( 'Order_M2_North_Base_Marker' ), 10, ArmyBrains[Player] )
+        ScenarioFramework.CreateVisibleAreaLocation(350, ScenarioInfo.Prison:GetPosition(), 1, ArmyBrains[Player])
 
-    WaitSeconds(1)
-    ScenarioFramework.Dialogue(OpStrings.X02_M02_010, nil, true)
-    Cinematics.CameraMoveToMarker(ScenarioUtils.GetMarker('Cam_2_1'), 3)
-    WaitSeconds(1)
+        scene.WaitSeconds(1)
+        ScenarioFramework.Dialogue(OpStrings.X02_M02_010, nil, true)
+        scene.CameraMoveToMarker(ScenarioUtils.GetMarker('Cam_2_1'), 3)
+        scene.WaitSeconds(1)
 
-    ScenarioFramework.Dialogue(OpStrings.X02_M02_011, nil, true)
-    Cinematics.CameraMoveToMarker(ScenarioUtils.GetMarker('Cam_2_2'), 3)
-    WaitSeconds(1)
-    Cinematics.CameraMoveToMarker(ScenarioUtils.GetMarker('Cam_2_3'), 4)
-    WaitSeconds(1)
+        ScenarioFramework.Dialogue(OpStrings.X02_M02_011, nil, true)
+        scene.CameraMoveToMarker(ScenarioUtils.GetMarker('Cam_2_2'), 3)
+        scene.WaitSeconds(1)
+        scene.CameraMoveToMarker(ScenarioUtils.GetMarker('Cam_2_3'), 4)
+        scene.WaitSeconds(1)
 
-    ScenarioFramework.Dialogue(OpStrings.X02_M02_012, nil, true)
-    Cinematics.CameraMoveToMarker(ScenarioUtils.GetMarker('Cam_2_4'), 4)
-    WaitSeconds(1)
+        ScenarioFramework.Dialogue(OpStrings.X02_M02_012, nil, true)
+        scene.CameraMoveToMarker(ScenarioUtils.GetMarker('Cam_2_4'), 4)
+        scene.WaitSeconds(1)
 
-    Cinematics.CameraMoveToMarker(ScenarioUtils.GetMarker('Cam_2_5'), 4)
-    -- WaitSeconds(1)
+        scene.CameraMoveToMarker(ScenarioUtils.GetMarker('Cam_2_5'), 4)
+        -- scene.WaitSeconds(1)
 
-    ScenarioFramework.Dialogue(OpStrings.X02_M02_013, nil, true)
-    Cinematics.CameraMoveToMarker(ScenarioUtils.GetMarker('Cam_2_6'), 5)
-    WaitSeconds(1)
+        ScenarioFramework.Dialogue(OpStrings.X02_M02_013, nil, true)
+        scene.CameraMoveToMarker(ScenarioUtils.GetMarker('Cam_2_6'), 5)
+        scene.WaitSeconds(1)
 
-    ScenarioFramework.Dialogue(OpStrings.X02_M02_014, nil, true)
-    Cinematics.CameraMoveToMarker(ScenarioUtils.GetMarker('Cam_2_7'), 3)
+        ScenarioFramework.Dialogue(OpStrings.X02_M02_014, nil, true)
+        scene.CameraMoveToMarker(ScenarioUtils.GetMarker('Cam_2_7'), 3)
 
-    Cinematics.SetInvincible('M1_Playable_Area', true)
-    Cinematics.ExitNISMode()
+        scene.SetInvincible('M1_Playable_Area', true)
 
-    StartMission2()
+        StartMission2()
+    end)
 end
 
 function StartMission2()
